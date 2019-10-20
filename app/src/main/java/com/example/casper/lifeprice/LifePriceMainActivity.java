@@ -40,6 +40,7 @@ public class LifePriceMainActivity extends AppCompatActivity {
     private ListView listViewSuper;
     private GoodsArrayAdapter theAdaper;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class LifePriceMainActivity extends AppCompatActivity {
         listViewSuper.setAdapter(theAdaper);
 
         this.registerForContextMenu(listViewSuper);
+
     }
 
     @Override
@@ -152,6 +154,7 @@ public class LifePriceMainActivity extends AppCompatActivity {
                 Toast.makeText(this, "版权所有by shpchen!", Toast.LENGTH_SHORT).show();
                 break;
         }
+
         return super.onContextItemSelected(item);
     }
 
@@ -195,4 +198,15 @@ public class LifePriceMainActivity extends AppCompatActivity {
             return item;
         }
     }
+
+    //接受intent传输的数据
+//    Intent backIntent=GoodEditActivity.backTemp.backIntent;
+//    Bundle back_bundle=backIntent.getExtras();
+//    String backName = back_bundle.getString("edit_text_view_good");
+//    String backPrice = back_bundle.getString("edit_text_view_price");
+//    TextView textViewGoodName=(TextView) this.findViewById(R.id.text_view_good_name);
+//    TextView textViewGoodPrice=(TextView) this.findViewById(R.id.text_view_good_price);
+//            textViewGoodName.setText(backName);
+//            textViewGoodPrice.setText(backPrice);
+//            Toast.makeText(this,"cancel",Toast.LENGTH_LONG).show();
 }
