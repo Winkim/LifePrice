@@ -13,10 +13,6 @@ public class GoodEditActivity extends AppCompatActivity {
     private EditText editTextGoodName,editTextGoodPrice;
     private Button buttonOk,buttonCancel;
     private int editPosition;
-//    public Intent backIntent;
-//    public static GoodEditActivity backTemp = null;
-
-    //public static final int KEYCODE_BACK = 903;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,46 +50,5 @@ public class GoodEditActivity extends AppCompatActivity {
                 GoodEditActivity.this.finish();
             }
         });
-
-
-
-    }
-
-//    @Override
-////    public void onBackPressed(){
-////        Intent backIntent = new Intent();
-////        backIntent.putExtra("edit_position",editPosition);
-////        backIntent.putExtra("good_name",editTextGoodName.getText().toString());
-////        backIntent.putExtra("good_price",Double.parseDouble(editTextGoodPrice.getText().toString()));
-////        setResult(RESULT_OK,backIntent);
-////        GoodEditActivity.this.finish();
-////    }
-
-//    @Override
-    //重载intent
-//    protected void onNewIntent(Intent backIntent){
-//        super.onNewIntent(backIntent);
-//        setIntent(backIntent);
-//    }
-
-    @Override
-//    重载物理返回键
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        if(keyCode == KeyEvent.KEYCODE_BACK){
-            String back_name=((EditText)findViewById(R.id.edit_text_good_name)).getText().toString();
-            String back_price=((EditText)findViewById(R.id.edit_text_good_price)).getText().toString();
-
-            Intent backIntent = new Intent(GoodEditActivity.this,LifePriceMainActivity.class);
-            Bundle back_bundle = new Bundle();
-            back_bundle.putCharSequence("back_name",back_name);
-            back_bundle.putCharSequence("back_price",back_price);
-            backIntent.putExtras(back_bundle);
-            setResult(RESULT_OK,backIntent);
-            GoodEditActivity.this.finish();
-            //startActivity(backIntent);
-
-        }
-        return super.onKeyDown(keyCode,event);
     }
 }

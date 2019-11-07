@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -21,7 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.casper.lifeprice.data.FileDataSource;
+import com.example.casper.lifeprice.data.GoodFragmentPagerAdapter;
 import com.example.casper.lifeprice.data.model.Good;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +42,7 @@ public class LifePriceMainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_UPDATE_GOOD = 902;
     private ArrayList<Good> theGoods;
     private FileDataSource fileDataSource;
-    private ListView listViewSuper;
     private GoodsArrayAdapter theAdaper;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +51,32 @@ public class LifePriceMainActivity extends AppCompatActivity {
 
         InitData();
 
-        listViewSuper= (ListView) this.findViewById(R.id.list_view_goods);
         theAdaper=new GoodsArrayAdapter(this,R.layout.list_item_good,theGoods);
-        listViewSuper.setAdapter(theAdaper);
 
-        this.registerForContextMenu(listViewSuper);
+        GoodFragmentPagerAdapter myPageAdapter = new GoodFragmentPagerAdapter(getSupportFragmentManager());
+
+        ArrayList<Fragment> datas = new ArrayList<Fragment>();
+        datas.add(new GoodListFragment(theAdaper));
+        datas.add(new MapFragment());
+        datas.add(new WebFragment());
+        myPageAdapter.setData(datas);
+
+        ArrayList<String> titles = new ArrayList<String>();
+        titles.add("商品");
+        titles.add("商家");
+        titles.add("信息");
+        myPageAdapter.setTitles(titles);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager.setAdapter(myPageAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        if(v==listViewSuper) {
+        if(v==this.findViewById(R.id.list_view_goods)) {
             int itemPosition=((AdapterView.AdapterContextMenuInfo)menuInfo).position;
             menu.setHeaderTitle(theGoods.get(itemPosition).getName());
             menu.add(0, CONTEXT_MENU_ITEM_NEW, 0, "新建");
@@ -84,7 +102,7 @@ public class LifePriceMainActivity extends AppCompatActivity {
                     theAdaper.notifyDataSetChanged();
 
                     Toast.makeText(this, "新建成功", Toast.LENGTH_SHORT).show();
-               }
+                }
                 break;
             case REQUEST_CODE_UPDATE_GOOD:
                 if(resultCode==RESULT_OK)
@@ -154,7 +172,6 @@ public class LifePriceMainActivity extends AppCompatActivity {
                 Toast.makeText(this, "版权所有by shpchen!", Toast.LENGTH_SHORT).show();
                 break;
         }
-
         return super.onContextItemSelected(item);
     }
 
@@ -198,15 +215,4 @@ public class LifePriceMainActivity extends AppCompatActivity {
             return item;
         }
     }
-
-    //接受intent传输的数据
-//    Intent backIntent=GoodEditActivity.backTemp.backIntent;
-//    Bundle back_bundle=backIntent.getExtras();
-//    String backName = back_bundle.getString("edit_text_view_good");
-//    String backPrice = back_bundle.getString("edit_text_view_price");
-//    TextView textViewGoodName=(TextView) this.findViewById(R.id.text_view_good_name);
-//    TextView textViewGoodPrice=(TextView) this.findViewById(R.id.text_view_good_price);
-//            textViewGoodName.setText(backName);
-//            textViewGoodPrice.setText(backPrice);
-//            Toast.makeText(this,"cancel",Toast.LENGTH_LONG).show();
 }
