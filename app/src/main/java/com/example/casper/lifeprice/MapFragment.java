@@ -25,7 +25,10 @@ import com.baidu.mapapi.model.LatLng;
 import com.example.casper.lifeprice.data.ShopLoader;
 import com.example.casper.lifeprice.data.model.Shop;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> origin/master
 
 
 /**
@@ -71,6 +74,7 @@ public class MapFragment extends Fragment {
             }
         });
         downloadAndDrawShops(baiduMap);
+<<<<<<< HEAD
         return view;
     }
 
@@ -92,6 +96,10 @@ public class MapFragment extends Fragment {
             OverlayOptions textOption = new TextOptions().bgColor(0xAAFFFF00).fontSize(50).fontColor(0xAAFFFF00);
             baiduMap.addOverlay(textOption);
         }
+=======
+
+        return view;
+>>>>>>> origin/master
     }
 
     private void downloadAndDrawShops(final BaiduMap baiduMap) {

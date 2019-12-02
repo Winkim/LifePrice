@@ -13,16 +13,25 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.logging.Handler;
+=======
+>>>>>>> origin/master
 
 public class ShopLoader {
     public ArrayList<Shop> getShops() {
         return shops;
     }
 
+<<<<<<< HEAD
     private ArrayList<Shop> shops = new ArrayList<>();
 
     public String download(String urlStr) {
+=======
+    private ArrayList<Shop> shops=new ArrayList<>();
+    public String download(String urlStr)
+    {
+>>>>>>> origin/master
         HttpURLConnection connection = null;
         try {
             // 调用URL对象的openConnection方法获取HttpURLConnection的实例
@@ -38,7 +47,11 @@ public class ShopLoader {
             //设置请求头里面的属性
             //connection.setRequestProperty();
             // 开始连接
+<<<<<<< HEAD
             Log.i("HttpURLConnection.GET", "开始连接");
+=======
+            Log.i("HttpURLConnection.GET","开始连接");
+>>>>>>> origin/master
             connection.connect();
             if (connection.getResponseCode() == 200) {
                 Log.i("HttpURLConnection.GET", "请求成功");
@@ -52,6 +65,7 @@ public class ShopLoader {
                     response.append(line);
                 }
                 return response.toString();
+<<<<<<< HEAD
             } else {
                 Log.i("HttpURLConnection.GET", "请求失败");
             }
@@ -59,14 +73,28 @@ public class ShopLoader {
             e.printStackTrace();
         } finally {
             if (connection != null) {
+=======
+            }else{
+                Log.i("HttpURLConnection.GET", "请求失败");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            if (connection != null){
+>>>>>>> origin/master
                 // 结束后，关闭连接
                 connection.disconnect();
             }
         }
         return "";
     }
+<<<<<<< HEAD
 
     public void parseJson(String content) {
+=======
+    public void parseJson(String content)
+    {
+>>>>>>> origin/master
         shops.clear();
         try {
             //这里的text就是上边获取到的数据，一个String.
@@ -85,6 +113,7 @@ public class ShopLoader {
             e.printStackTrace();
         }
     }
+<<<<<<< HEAD
 }
 //    public void load(final Handler handler, final String url)
 //    {
@@ -98,3 +127,6 @@ public class ShopLoader {
 //        }).start();
 //    }
 //}
+=======
+}
+>>>>>>> origin/master
