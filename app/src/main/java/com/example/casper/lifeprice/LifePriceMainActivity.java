@@ -59,12 +59,14 @@ public class LifePriceMainActivity extends AppCompatActivity {
         datas.add(new GoodListFragment(theAdaper));
         datas.add(new MapFragment());
         datas.add(new WebFragment());
+        datas.add(new GameFragment());
         myPageAdapter.setData(datas);
 
         ArrayList<String> titles = new ArrayList<String>();
         titles.add("商品");
         titles.add("商家");
         titles.add("信息");
+        titles.add("游戏");
         myPageAdapter.setTitles(titles);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
